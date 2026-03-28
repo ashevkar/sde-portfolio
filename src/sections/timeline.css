@@ -1,0 +1,70 @@
+.timeline-wrapper {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  min-height: 100vh;
+  padding: 60px 20px;
+  color: white;
+  font-family: sans-serif;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.timeline-line-progress {
+  width: 2px;
+  background: linear-gradient(to bottom,  var(--accent), var(--accent2));
+  box-shadow: 0 0 10px  var(--accent), 0 0 20px var(--accent2);
+}
+
+.timeline-items {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 60px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 17px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent2);
+}
+
+.timeline-year {
+  color:  var(--accent);
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.timeline-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.timeline-company {
+  color: var(--text-muted);
+}
+
+.timeline-location {
+  color: #94a3b8;
+  font-size: 14px;
+}
