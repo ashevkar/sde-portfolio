@@ -9,7 +9,7 @@ const projects = [
     title: 'Tracer Code Copilot',
     desc: 'AI-powered code refactoring backend system with secure API endpoints, efficient data processing pipelines, and sub-100ms response times. Built comprehensive logging and monitoring for high availability.',
     tags: ['Node.js', 'AI/ML', 'REST APIs', 'Monitoring', 'Scalable Arch'],
-    color: '#00f5c4',
+    color: 'var(--accent)',
     icon: '⚡',
   },
   {
@@ -122,7 +122,7 @@ export default function Projects() {
       <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
         <p className="section-label">04 — Projects</p>
         <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '4rem' }}>
-          Selected <span style={{ color: '#00f5c4' }}>Work</span>
+          Selected <span style={{ color: 'var(--accent)' }}>Work</span>
         </h2>
       </motion.div>
 

@@ -1,5 +1,5 @@
 .timeline-wrapper {
-  background: radial-gradient(circle at top, #0f172a, #020617);
+  background: radial-gradient(circle at top, #0f172a, #021709);
   min-height: 100vh;
   padding: 60px 20px;
   color: white;
@@ -23,8 +23,8 @@
 
 .timeline-line-progress {
   width: 2px;
-  background: linear-gradient(to bottom,  var(--accent), var(--accent2));
-  box-shadow: 0 0 10px  var(--accent), 0 0 20px var(--accent2);
+  background: linear-gradient(to bottom,  var(--accent), var(--second));
+  box-shadow: 0 0 10px  var(--accent);
 }
 
 .timeline-items {

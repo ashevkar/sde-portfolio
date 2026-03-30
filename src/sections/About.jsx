@@ -223,7 +223,7 @@ export default function About() {
                 marginBottom: "1rem",
               }}
             >
-              Built, not <span style={{ color: "#00f5c4" }}>stumbled</span>
+              Built, not <span style={{ color: 'var(--accent)' }}>stumbled</span>
             </h2>
           </motion.h2>
 

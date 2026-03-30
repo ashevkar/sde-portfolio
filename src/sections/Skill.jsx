@@ -16,7 +16,7 @@ const bars = [
 const tagGroups = [
   {
     cat: "Frontend",
-        color: '#00f5c4',
+        color: 'var(--accent)',
 
     tags: [
       "React",
@@ -127,7 +127,7 @@ function SkillBar({ item, index, trigger }) {
             height: "100%",
             width: `${width}%`,
             background:
-              "linear-gradient(90deg, var(--accent) 0%, rgba(200,245,66,0.5) 100%)",
+              "linear-gradient(90deg, var(--accent) 0%, rgba(207, 255, 64, 0.89) 100%)",
             borderRadius: "2px",
             transition: "width 1.2s cubic-bezier(0.16,1,0.3,1)",
             boxShadow: "0 0 8px rgba(200,245,66,0.4)",
@@ -155,7 +155,7 @@ export default function Skills() {
         <p className="section-label">05 — Skills</p>
 
         <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '4rem' }}>
-          Tech <span style={{ color: '#00f5c4' }}>Arsenal</span>
+          Tech <span style={{ color: 'var(--accent)' }}>Arsenal</span>
         </h2>
       </motion.div>
 

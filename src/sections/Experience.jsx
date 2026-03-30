@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
-import "./timeline.css";
+import "./experience.css";
 
 const timelineData = [
   {
@@ -30,7 +30,7 @@ const timelineData = [
   },
 
   {
-    year: "Jun 2020",
+    year: "Aug 2016 - Jun 2020",
     title: "Bachelor of Engineering - Information Technology",
     company: "University of Pune",
     location: "Pune, India",
@@ -67,7 +67,7 @@ export default function Timeline() {
           }}
         >
           The journey
-          <span style={{ color: "#00f5c4" }}>
+          <span style={{ color: "var(--accent)" }}>
             <br />
             so far.
           </span>

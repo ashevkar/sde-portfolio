@@ -43,7 +43,7 @@ export default function CustomCursor() {
       <style>{`
         .cursor-dot {
           width: 6px; height: 6px;
-          background: #00f5c4;
+          background: var(--accent);
           border-radius: 50%;
           position: fixed;
           pointer-events: none;
@@ -53,7 +53,7 @@ export default function CustomCursor() {
         }
         .cursor-ring {
           width: 32px; height: 32px;
-          border: 1px solid rgba(0,245,196,0.6);
+          border: 1px solid var(--accent);
           border-radius: 50%;
           position: fixed;
           pointer-events: none;

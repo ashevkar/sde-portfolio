@@ -23,7 +23,7 @@ function HeroSphere() {
     <div style={{ position: 'absolute', right: '8%', top: '50%', transform: 'translateY(-50%)', width: '420px', height: '420px', opacity: 0.7 }}>
       <Canvas camera={{ position: [0, 0, 3] }}>
         <ambientLight intensity={0.3} />
-        <pointLight position={[2, 2, 2]} color="#00f5c4" intensity={3} />
+        <pointLight position={[2, 2, 2]} color="var(--accent)" intensity={3} />
         <pointLight position={[-2, -1, -2]} color="#7b61ff" intensity={2} />
         <AnimatedSphere />
       </Canvas>
@@ -62,7 +62,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          style={{ fontFamily: 'DM Mono', fontSize: '0.75rem', color: '#00f5c4', letterSpacing: '0.3em', marginBottom: '1.5rem' }}
+          style={{ fontFamily: 'DM Mono', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.3em', marginBottom: '1.5rem' }}
         >
           01 — Hello, World
         </motion.p>
@@ -71,11 +71,16 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', fontWeight: 800, lineHeight: 1.05, marginBottom: '0.5rem' }}
+          style={{ fontWeight: 900,fontSize: "clamp(52px, 10vw, 120px)",lineHeight: 1.05, marginBottom: '0.5rem', display: "inline-block",
+                  // fontWeight: 900,
+                  // fontSize: "clamp(52px, 10vw, 120px)",
+                  color: "#f0f4f8",
+                  // letterSpacing: "-0.02em", 
+                }}
         >
           Aishwarya
           <br />
-          <span style={{ color: '#00f5c4' }}>Shevkar</span>
+          <span style={{ color: 'var(--accent)' }}>Shevkar</span>
         </motion.h1>
 
         <motion.div
@@ -119,7 +124,7 @@ export default function Hero() {
             whileHover={{ scale: 1.04, boxShadow: '0 0 30px rgba(0,245,196,0.5)' }}
             whileTap={{ scale: 0.98 }}
             style={{
-              background: 'linear-gradient(135deg, #00f5c4, #7b61ff)',
+              background: 'linear-gradient(135deg, var(--accent), #7b61ff)',
               color: '#050810', fontWeight: 700, fontFamily: 'DM Mono',
               fontSize: '0.8rem', letterSpacing: '0.1em', padding: '14px 28px',
               borderRadius: '8px', textDecoration: 'none', cursor: 'pointer',
@@ -151,7 +156,7 @@ export default function Hero() {
         >
           {[['3+', 'Years Exp.'], ['3', 'Companies'], ['15+', 'Projects'], ['20+', 'Technologies']].map(([num, label]) => (
             <div key={label}>
-              <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#00f5c4', fontFamily: 'Space Mono' }}>{num}</div>
+              <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'Space Mono' }}>{num}</div>
               <div style={{ fontSize: '0.65rem', color: '#6b7280', fontFamily: 'DM Mono', letterSpacing: '0.1em', marginTop: '2px' }}>{label}</div>
             </div>
           ))}
@@ -168,7 +173,7 @@ export default function Hero() {
         }}
       >
         <span style={{ fontFamily: 'DM Mono', fontSize: '0.6rem', color: '#6b7280', letterSpacing: '0.2em' }}>SCROLL</span>
-        <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, #00f5c4, transparent)' }} />
+        <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, var(--accent), transparent)' }} />
       </motion.div>
     </section>
   );

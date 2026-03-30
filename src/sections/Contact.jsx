@@ -96,8 +96,8 @@ export default function LetsConnect() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         .connect-card {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(0, 229, 255, 0.15);
+          background: rgba(44, 44, 44, 0.04);
+          border: 1px solid rgba(170, 170, 170, 0.15);
           border-radius: 12px;
           padding: 32px 48px;
           width: 280px;
@@ -113,15 +113,15 @@ export default function LetsConnect() {
         }
 
         .connect-card:hover {
-          background: rgba(0, 229, 255, 0.06);
-          border-color: rgba(0, 229, 255, 0.5);
+          background: rgba(63, 63, 63, 0.06);
+          border-color: var(--accent);
         }
 
         .connect-card::before {
           content: '';
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at 50% 0%, rgba(0,229,255,0.08) 0%, transparent 70%);
+          background: radial-gradient(circle at 50% 0%, rgba(50, 50, 50, 0.08) 0%, transparent 70%);
           opacity: 0;
           transition: opacity 0.3s;
         }
@@ -279,7 +279,7 @@ export default function LetsConnect() {
               style={{
                 fontFamily: "'Space Mono', monospace",
                 fontSize: "clamp(12px, 1.3vw, 15px)",
-                color: "#66aaa3",
+                color: "var(--accent)",
                 marginTop: 12,
                 letterSpacing: "0.01em",
               }}
@@ -316,7 +316,7 @@ export default function LetsConnect() {
                 viewBox="0 0 24 24"
                 fill="none"
                 animate={{
-                  color: hoveredCard === "linkedin" ? "#00e5ff" : "#00e5ff",
+                  color: hoveredCard === "linkedin" ? "var(--accent)" : "#00e5ff",
                 }}
               >
                 <rect
@@ -325,24 +325,24 @@ export default function LetsConnect() {
                   width="20"
                   height="20"
                   rx="4"
-                  stroke="#00e5ff"
+                  stroke="var(--accent)"
                   strokeWidth="1.5"
                 />
                 <path
                   d="M7 10v7M7 7v.5"
-                  stroke="#00e5ff"
+                  stroke="var(--accent)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />
                 <path
                   d="M11 17v-4c0-1.105.895-2 2-2s2 .895 2 2v4"
-                  stroke="#00e5ff"
+                  stroke="var(--accent)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />
                 <path
                   d="M11 10v7"
-                  stroke="#00e5ff"
+                  stroke="var(--accent)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />

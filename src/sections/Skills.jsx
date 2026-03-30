@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 const skillGroups = [
   {
     label: 'Frontend',
-    color: '#00f5c4',
+    color: 'var(--accent)',
     skills: ['React', 'Next.js', 'TypeScript', 'Redux Toolkit', 'HTML5/CSS3', 'Material UI', 'Responsive Design'],
   },
   {
@@ -97,7 +97,7 @@ export default function Skills() {
       <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
         <p className="section-label">04 — Skills</p>
         <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '4rem' }}>
-          Tech <span style={{ color: '#00f5c4' }}>Arsenal</span>
+          Tech <span style={{ color: 'var(--accent)' }}>Arsenal</span>
         </h2>
       </motion.div>
 
@@ -112,7 +112,7 @@ export default function Skills() {
         animate={certInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <p style={{ fontFamily: 'DM Mono', fontSize: '0.72rem', color: '#00f5c4', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+        <p style={{ fontFamily: 'DM Mono', fontSize: '0.72rem', color: 'var(--accent)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
           Certifications & Achievements
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
@@ -126,7 +126,7 @@ export default function Skills() {
               className="glass-card"
               style={{ padding: '10px 20px', display: 'flex', alignItems: 'center', gap: '10px' }}
             >
-              <span style={{ color: '#00f5c4', fontSize: '0.7rem' }}>✦</span>
+              <span style={{ color: 'var(--accent)', fontSize: '0.7rem' }}>✦</span>
               <span style={{ fontFamily: 'DM Mono', fontSize: '0.75rem', color: '#e8eaf6' }}>{c}</span>
             </motion.div>
           ))}

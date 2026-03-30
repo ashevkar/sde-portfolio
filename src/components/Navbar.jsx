@@ -4,31 +4,30 @@ import { motion } from 'framer-motion';
 const links = ['Hero', 'About', 'Experience', 'Projects', 'Skills', 'Contact'];
 
 export default function Sidebar() {
-  const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('Hero');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Navbar background change
-      setScrolled(window.scrollY > 50);
-
-      // Detect active section
       const scrollPos = window.scrollY + window.innerHeight / 2;
 
       links.forEach((link) => {
         const section = document.getElementById(link.toLowerCase());
         if (!section) return;
-
         const top = section.offsetTop;
         const height = section.offsetHeight;
-
         if (scrollPos >= top && scrollPos < top + height) {
           setActive(link);
         }
       });
     };
-
-    
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -38,9 +37,12 @@ export default function Sidebar() {
     const section = document.getElementById(id.toLowerCase());
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
-      setActive(id); // instant highlight on click
+      setActive(id);
     }
   };
+
+  // Don't render at all on mobile
+  if (isMobile) return null;
 
   return (
     <motion.nav
@@ -59,9 +61,6 @@ export default function Sidebar() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '1.5rem 0',
-        // background: scrolled ? 'transparent' : 'transparent',
-        // backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        // borderLeft: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
         transition: 'all 0.4s ease',
       }}
     >
@@ -87,13 +86,25 @@ export default function Sidebar() {
               fontFamily: 'DM Mono',
               fontSize: '0.72rem',
               letterSpacing: '0.15em',
-              color: active === l ? '#00f5c4' : '#6b7280',
+              color: active === l ? 'var(--accent)' : '#6b7280',
               transition: 'all 0.25s ease',
               textOrientation: 'upright',
             }}
-            whileHover={{ color: '#00f5c4', scale: 1.1 }}
+            whileHover={{ color: 'var(--accent)', scale: 1.1 }}
           >
-            {String(i + 1).padStart(2, '0')}. {}
+
+           <span
+  style={{
+    display: 'block',
+    width: active === l ? '12px' : '6px',
+    height: active === l ? '12px' : '6px',
+    borderRadius: '50%',
+    background: active === l ? 'var(--accent)' : 'transparent',
+    border: `2px solid ${active === l ? 'var(--accent)' : '#6b7280'}`,
+    transition: 'all 0.3s ease',
+  }}
+/>
+
           </motion.button>
         ))}
       </div>
