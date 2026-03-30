@@ -1,16 +1,51 @@
-# React + Vite
+# 🚀 SDE Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, interactive portfolio showcasing full-stack projects built with cutting-edge web technologies.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Category Filtering**: Browse projects by technology (React, Next.js, TypeScript, AI/ML, etc.)
+- **Interactive 3D Background**: Animated three.js elements with smooth transitions
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Project Showcase**: 10+ featured projects with detailed descriptions and tech stacks
+- **Smooth Animations**: Framer Motion animations for elegant page transitions
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React + Vite
+- **Styling**: CSS + Tailwind CSS
+- **Animations**: Framer Motion + three.js
+- **Deployment**: Vercel
 
-## Expanding the ESLint configuration
+## 🌐 Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[🔗 Visit Portfolio](https://sde-portfolio-eta.vercel.app/)
+
+## 🏃 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── components/      # Reusable UI components
+├── sections/        # Page sections (Hero, Projects, Experience, etc.)
+├── assets/          # Images and static files
+├── App.jsx          # Main app component
+└── main.jsx         # Entry point
+```
+
+## 📬 Contact
+
+Feel free to reach out for collaborations or inquiries!
+
