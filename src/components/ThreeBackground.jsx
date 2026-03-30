@@ -3,18 +3,17 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
+// Generate positions outside component to avoid Math.random in render
+const count = 3000;
+const positions = new Float32Array(count * 3);
+for (let i = 0; i < count; i++) {
+  positions[i * 3] = (Math.random() - 0.5) * 20;
+  positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+}
+
 function ParticleField() {
   const ref = useRef();
-  const count = 3000;
-  const positions = useMemo(() => {
-    const p = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      p[i * 3] = (Math.random() - 0.5) * 20;
-      p[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      p[i * 3 + 2] = (Math.random() - 0.5) * 10;
-    }
-    return p;
-  }, []);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();

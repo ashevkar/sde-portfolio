@@ -1,38 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   motion,
   useMotionValue,
-  useSpring,
-  AnimatePresence,
 } from "framer-motion";
-
-// Particle dot component
-function Particle({ x, y, size = 2, opacity = 0.4 }) {
-  return (
-    <motion.div
-      style={{
-        position: "absolute",
-        left: x,
-        top: y,
-        width: size,
-        height: size,
-        borderRadius: "50%",
-        backgroundColor:'var(--accent)',
-
-        opacity,
-      }}
-      animate={{ opacity: [opacity, opacity * 0.3, opacity] }}
-      transition={{
-        duration: 3 + Math.random() * 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: Math.random() * 3,
-      }}
-    />
-  );
-}
-
-
 
 export default function LetsConnect() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -46,7 +16,7 @@ export default function LetsConnect() {
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [mouseX, mouseY]);
 
   const containerVariants = {
     hidden: {},

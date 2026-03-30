@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import "./About.css";
 
 function PhotoPlaceholder() {
   return (
@@ -198,7 +197,49 @@ export default function About() {
 
   return (
     <section id="about" className="section" style={{ padding: "2rem 8%" }}>
-
+      <style>{`
+        .about-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+          gap: 1.5rem;
+        }
+        .section {
+          background-color: #050810;
+        }
+        .about-photo-wrap {
+          display: flex;
+          justify-content: center;
+        }
+        .about-quote-box {
+          padding: 1.2rem 1.5rem;
+          border: 1px solid var(--border-light);
+          border-left: 3px solid var(--accent);
+          border-radius: 4px;
+          margin-bottom: 2rem;
+          background: rgba(200,245,66,0.03);
+        }
+        .about-contact-links {
+          margin-top: 2.5rem;
+          display: flex;
+          gap: 1.5rem;
+        }
+        .about-link {
+          font-family: var(--mono);
+          font-size: 0.68rem;
+          letter-spacing: 0.08em;
+          border-bottom: 1px solid var(--border-light);
+          padding-bottom: 2px;
+          cursor: pointer;
+        }
+        .about-link-accent {
+          color: var(--accent);
+          border-color: var(--accent);
+        }
+        .about-link-secondary {
+          color: var(--text-2);
+          border-color: var(--border-light);
+        }
+      `}</style>
       <div className="about-grid">
         {/* Photo */}
         <div className="about-photo-wrap">
