@@ -152,7 +152,7 @@ export default function Skills() {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <p className="section-label">04 — Skills</p>
+        <p className="section-label">05 — Skills</p>
 
         <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '4rem' }}>
           Tech <span style={{ color: '#00f5c4' }}>Arsenal</span>

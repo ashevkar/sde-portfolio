@@ -54,10 +54,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="about" style={{ display: 'flex', alignItems: 'center', padding: '0 8%', position: 'relative', overflow: 'hidden' }}>
+    <section id="hero" style={{ display: 'flex', alignItems: 'center', padding: '0 8%', position: 'relative', overflow: 'hidden', justifyContent: 'center'}}>
       <HeroSphere />
 
-      <div style={{ maxWidth: '640px', zIndex: 10 }}>
+      <div style={{ maxWidth: '640px', zIndex: 10, display: 'flex', flexDirection:'column', alignItems:'center'}}>
         <motion.p
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}

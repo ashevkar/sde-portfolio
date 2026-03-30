@@ -58,7 +58,7 @@ export default function Timeline() {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <p className="section-label">02 — Education and Experience</p>
+        <p className="section-label">03 — Education and Experience</p>
         <h2
           style={{
             fontSize: "clamp(2.2rem, 5vw, 3.5rem)",

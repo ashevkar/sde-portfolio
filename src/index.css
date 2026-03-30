@@ -14,7 +14,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth;   user-select: none;}
 body {
   background: var(--bg);
   color: var(--text);
@@ -54,4 +54,7 @@ section { min-height: 100vh; position: relative; }
   border: 1px solid rgba(0,245,196,0.2);
   color: var(--accent);
   letter-spacing: 0.05em;
+}
+.h2{
+  font-weight: 100;
 }

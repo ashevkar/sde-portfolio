@@ -1,133 +1,402 @@
-import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  AnimatePresence,
+} from "framer-motion";
 
-function ContactOrb() {
-  const ref = useRef();
-  useFrame(({ clock }) => {
-    ref.current.rotation.y = clock.getElapsedTime() * 0.4;
-    ref.current.rotation.x = clock.getElapsedTime() * 0.2;
-  });
+// Particle dot component
+function Particle({ x, y, size = 2, opacity = 0.4 }) {
   return (
-    <mesh ref={ref}>
-      <torusKnotGeometry args={[0.8, 0.25, 128, 16]} />
-      <meshStandardMaterial color="#00f5c4" wireframe opacity={0.5} transparent />
-    </mesh>
+    <motion.div
+      style={{
+        position: "absolute",
+        left: x,
+        top: y,
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        backgroundColor:'var(--accent)',
+
+        opacity,
+      }}
+      animate={{ opacity: [opacity, opacity * 0.3, opacity] }}
+      transition={{
+        duration: 3 + Math.random() * 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: Math.random() * 3,
+      }}
+    />
   );
 }
 
-const links = [
-  { label: 'Email', value: 'ashshevkar@gmail.com', href: 'mailto:ashshevkar@gmail.com', icon: '✉' },
-  { label: 'Phone', value: '(872) 664-2261', href: 'tel:8726642261', icon: '☎' },
-  { label: 'Location', value: 'Phoenix, AZ', href: '#', icon: '⌖' },
-  { label: 'LinkedIn', value: 'linkedin.com/in/aish06', href: 'https://www.linkedin.com/in/aish06/', icon: '⟡' },
-  { label: 'GitHub', value: 'github.com/ashshevkar', href: 'https://github.com/ashevkar', icon: '◈' },
-];
 
-export default function Contact() {
-  const ref = useRef();
-  const inView = useInView(ref, { once: true });
-  const [copied, setCopied] = useState('');
 
-  const copy = (text, label) => {
-    navigator.clipboard.writeText(text);
-    setCopied(label);
-    setTimeout(() => setCopied(''), 2000);
+export default function LetsConnect() {
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.18, delayChildren: 0.1 } },
+  };
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
+  const headlineVariants = {
+    hidden: { opacity: 0, y: 80, skewY: 4 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      skewY: 0,
+      transition: { duration: 1, ease: [0.22, 1, 0.36, 1] },
+    },
   };
 
   return (
-    <section id="contact" style={{ padding: '3rem 8%', minHeight: '80vh' }}>
-      <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
-        <p className="section-label">05 — Contact</p>
-        <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '1rem' }}>
-          Let's <span style={{ color: '#00f5c4' }}>Connect</span>
-        </h2>
-        <p style={{ color: '#9ca3af', fontSize: '1rem', maxWidth: '480px', lineHeight: 1.8, marginBottom: '4rem' }}>
-          Open to full-time roles, freelance projects, and interesting collaborations.
-          Drop me a message — I typically respond within 24 hours.
-        </p>
-      </motion.div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '4rem', alignItems: 'center' }}>
-        <div  style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {links.map((link, i) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              initial={{ opacity: 0, x: -40 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.1 * i + 0.2 }}
-              whileHover={{ x: 10 }}
-              onClick={(e) => {
-                if (link.label === 'Email' || link.label === 'Phone') {
-                  e.preventDefault();
-                  copy(link.value, link.label);
-                }
-              }}
-              className="glass-card"
-              target="_blank"
-              style={{
-                padding: '1.2rem 1.8rem',
-                display: 'flex', alignItems: 'center', gap: '1.2rem',
-                textDecoration: 'none', color: 'inherit', cursor: 'pointer',
-              }}
-            >
-              <span style={{ fontSize: '1.2rem', width: '24px', textAlign: 'center', color: '#00f5c4' }}>
-                {link.icon}
-              </span>
-              <div>
-                <div style={{ fontFamily: 'DM Mono', fontSize: '0.65rem', color: '#6b7280', letterSpacing: '0.15em', marginBottom: '2px' }}>
-                  {link.label}
-                </div>
-                <div style={{ fontSize: '0.9rem', color: '#e8eaf6' }}>{link.value}</div>
-              </div>
-              {copied === link.label && (
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  style={{ marginLeft: 'auto', fontFamily: 'DM Mono', fontSize: '0.65rem', color: '#00f5c4' }}
-                >
-                  Copied!
-                </motion.span>
-              )}
-            </motion.a>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          style={{ height: '380px' }}
-        >
-          <Canvas camera={{ position: [0, 0, 3] }}>
-            <ambientLight intensity={0.3} />
-            <pointLight position={[2, 2, 2]} color="#00f5c4" intensity={3} />
-            <pointLight position={[-2, -2, -2]} color="#7b61ff" intensity={2} />
-            <ContactOrb />
-          </Canvas>
-        </motion.div>
-      </div>
-
-      {/* Footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.8 }}
+    <section id="contact" style={{ padding: "3rem 8%" }}>
+      <div
         style={{
-          marginTop: '6rem', paddingTop: '2rem',
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          minHeight: "100vh",
+          // backgroundColor: "#080c14",
+          color: "#fff",
+          fontFamily: "'Space Mono', 'Courier New', monospace",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          overflow: "hidden",
+          padding: "60px 20px 40px",
         }}
       >
-        <span style={{ fontFamily: 'DM Mono', fontSize: '0.7rem', color: '#6b7280' }}>
-          Aishwarya Shevkar © 2025 — Built with React + Three.js
-        </span>
-        <span style={{ fontFamily: 'DM Mono', fontSize: '0.7rem', color: '#00f5c4' }}>
-          Phoenix, AZ
-        </span>
-      </motion.div>
+        {/* Google Fonts */}
+        <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow:wght@900&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        .connect-card {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(0, 229, 255, 0.15);
+          border-radius: 12px;
+          padding: 32px 48px;
+          width: 280px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 14px;
+          cursor: pointer;
+          transition: background 0.3s, border-color 0.3s, transform 0.2s;
+          position: relative;
+          overflow: hidden;
+          text-decoration:none;
+        }
+
+        .connect-card:hover {
+          background: rgba(0, 229, 255, 0.06);
+          border-color: rgba(0, 229, 255, 0.5);
+        }
+
+        .connect-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 50% 0%, rgba(0,229,255,0.08) 0%, transparent 70%);
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .connect-card:hover::before {
+          opacity: 1;
+        }
+
+        .card-label-linkedin {
+          color: var(--accent);
+          font-family: 'Space Mono', monospace;
+          font-size: 13px;
+          letter-spacing: 0.12em;
+          font-weight: 700;
+          text-decoration: none;
+
+        }
+
+        .card-label-email {
+          color: #8899aa;
+          font-family: 'Space Mono', monospace;
+          font-size: 13px;
+          letter-spacing: 0.12em;
+        }
+
+        .connect-card:hover .card-label-email {
+          color: #aabbcc;
+        }
+
+        .headline-line {
+          display: block;
+          overflow: hidden;
+        }
+      `}</style>
+
+        {/* Radial glow top-center */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-10%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "800px",
+            height: "500px",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Bottom vignette */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "200px",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Subtle grid lines */}
+        <div
+          style={{
+            position: "absolute",
+            cursor: "pointer",
+          }}
+        />
+      
+        {/* Main content */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          style={{
+            position: "relative",
+            zIndex: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+            maxWidth: "1200px",
+          }}
+        >
+          {/* Section label */}
+          <motion.div
+            variants={fadeUp}
+            style={{ marginBottom: 24, position: "relative" }}
+          >
+            <span
+              className = "section-label"
+            >
+              06. LET'S CONNECT
+            </span>
+          </motion.div>
+
+          {/* Massive headline */}
+          <div
+            style={{ textAlign: "center", marginBottom: 48, lineHeight: 0.88 }}
+          >
+            <span className="headline-line">
+              <motion.span
+                variants={headlineVariants}
+                style={{
+                  display: "inline-block",
+                  fontFamily: "'Barlow', sans-serif",
+                  fontWeight: 900,
+                  fontSize: "clamp(52px, 10vw, 120px)",
+                  color: "#f0f4f8",
+                  letterSpacing: "-0.02em",
+                }}
+                
+              >
+           
+                Let's build
+              </motion.span>
+            </span>
+            <br />
+            <span className="headline-line">
+              <motion.span
+                variants={headlineVariants}
+                style={{
+                  display: "inline-block",
+                  fontFamily: "'Barlow', sans-serif",
+                  fontWeight: 100,
+                  fontSize: "clamp(52px, 10vw, 120px)",
+                  color: "var(--accent)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                something.
+              </motion.span>
+            </span>
+          </div>
+
+          {/* Subtext */}
+          <motion.div
+            variants={fadeUp}
+            style={{ textAlign: "center", marginBottom: 56 }}
+          >
+            <p
+              style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: "clamp(13px, 1.5vw, 17px)",
+                color: "#c0d0dd",
+                lineHeight: 1.8,
+                maxWidth: 600,
+                letterSpacing: "0.01em",
+              }}
+            >
+              Open to collaborations, research roles, and opportunities in AI,
+              <br />
+              computer vision, and critical infrastructure.
+            </p>
+            <p
+              style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: "clamp(12px, 1.3vw, 15px)",
+                color: "#66aaa3",
+                marginTop: 12,
+                letterSpacing: "0.01em",
+              }}
+            >
+              Reach out — I'd love to hear from you.
+            </p>
+          </motion.div>
+
+          {/* CTA Cards */}
+          <motion.div
+            variants={fadeUp}
+            style={{
+              display: "flex",
+              gap: 20,
+              flexWrap: "wrap",
+              justifyContent: "center",
+              marginBottom: 80,
+            }}
+          >
+            {/* LinkedIn */}
+            <motion.a
+              href="https://www.linkedin.com/in/aish06/"
+              target="_blank"
+              className="connect-card"
+              whileHover={{ scale: 1.03, y: -4 }}
+              whileTap={{ scale: 0.97 }}
+              onHoverStart={() => setHoveredCard("linkedin")}
+              onHoverEnd={() => setHoveredCard(null)}
+            >
+              {/* LinkedIn Icon */}
+              <motion.svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                animate={{
+                  color: hoveredCard === "linkedin" ? "#00e5ff" : "#00e5ff",
+                }}
+              >
+                <rect
+                  x="2"
+                  y="2"
+                  width="20"
+                  height="20"
+                  rx="4"
+                  stroke="#00e5ff"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M7 10v7M7 7v.5"
+                  stroke="#00e5ff"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M11 17v-4c0-1.105.895-2 2-2s2 .895 2 2v4"
+                  stroke="#00e5ff"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M11 10v7"
+                  stroke="#00e5ff"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </motion.svg>
+              <span className="card-label-linkedin">Message on LinkedIn</span>
+            </motion.a>
+
+            {/* Email */}
+            <motion.a
+              href="mailto:ashshevkar@gmail.com"
+              className="connect-card"
+              whileHover={{ scale: 1.03, y: -4 }}
+              whileTap={{ scale: 0.97 }}
+              onHoverStart={() => setHoveredCard("email")}
+              onHoverEnd={() => setHoveredCard(null)}
+            >
+              {/* Email Icon */}
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3"
+                  y="5"
+                  width="18"
+                  height="14"
+                  rx="2"
+                  stroke={hoveredCard === "email" ? "#aabbcc" : "#556677"}
+                  strokeWidth="1.5"
+                  style={{ transition: "stroke 0.3s" }}
+                />
+                <path
+                  d="M3 8l9 6 9-6"
+                  stroke={hoveredCard === "email" ? "#aabbcc" : "#556677"}
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  style={{ transition: "stroke 0.3s" }}
+                />
+              </svg>
+              <span className="card-label-email">Send an Email</span>
+            </motion.a>
+          </motion.div>
+
+          {/* Footer */}
+          <motion.p
+            variants={fadeUp}
+            style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: "12px",
+              color: "#334455",
+              letterSpacing: "0.1em",
+            }}
+          >
+            Aishwarya Shevkar © 2025
+          </motion.p>
+        </motion.div>
+      </div>
     </section>
   );
 }

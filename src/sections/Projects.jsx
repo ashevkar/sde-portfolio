@@ -120,7 +120,7 @@ export default function Projects() {
   return (
     <section id="projects" style={{ padding: '3rem 8%' }}>
       <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }}>
-        <p className="section-label">03 — Projects</p>
+        <p className="section-label">04 — Projects</p>
         <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '4rem' }}>
           Selected <span style={{ color: '#00f5c4' }}>Work</span>
         </h2>
